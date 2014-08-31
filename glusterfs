@@ -261,8 +261,18 @@ def main():
                 quotas[q[0]] = q[1]
         return quotas        
 
+    def wait_for_peer(host):
+        for x in range(0, 4):
+            peers = get_peers()
+            if host in peers and peers[host][1].lower().find('peer in cluster') != -1:
+                return True
+            time.sleep(1)
+        return False
+
     def probe(host):
         run_gluster([ 'peer', 'probe', host ])
+        if not wait_for_peer(host):
+            module.fail_json(msg='failed to probe peer %s' % host)
         changed = True
 
     def probe_all_peers(hosts, peers):
