@@ -356,6 +356,11 @@ def main():
             start_volume(volume_name)
             volumes = get_volumes()
             changed = True
+    if action == 'rebalance':
+        if volume_name not in volumes:
+            module.fail_json(msg='volume not found %s' % volume_name)
+        rebalance(volume_name)
+        changed = True
     if action == 'stop':
         if volume_name not in volumes:
             module.fail_json(msg='volume not found %s' % volume_name)
