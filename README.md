@@ -1,6 +1,10 @@
 ansible-glusterfs
 =================
 
+*This module has been added to Ansible core modules, look for
+enlightment there!* So this module is no longer updated and
+is very out of date.
+
 Ansible GlusterFS module for managing GlusterFS volumes.
 
 ## Sample playbook
